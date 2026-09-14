@@ -1,0 +1,1 @@
+GSAP 3.13.0 (incluye ScrollTrigger). Licencia declarada por el paquete: Standard no charge license. Texto y condiciones: https://gsap.com/standard-license/ . Los avisos de copyright originales se conservan en los scripts distribuidos.

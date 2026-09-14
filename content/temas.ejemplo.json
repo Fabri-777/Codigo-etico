@@ -1,0 +1,9 @@
+[
+  {
+    "id": "tema-01",
+    "title": "Título del tema",
+    "description": "Escribe aquí el resumen o contexto del documento.\n\nPuedes separar la explicación en varios párrafos.",
+    "file": "pdfs/tema-01.pdf",
+    "cover": "portadas/tema-01.jpg"
+  }
+]
