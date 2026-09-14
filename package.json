@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "gsap": "3.13.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.5",
+    "tailwindcss": "3.4.17"
+  },
+  "name": "brujula-etica",
+  "private": true,
+  "scripts": {
+    "build": "node build.cjs",
+    "dev": "node dev.cjs"
+  }
+}

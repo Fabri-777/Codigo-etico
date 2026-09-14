@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Código Ético | Portafolio Digital 4AH</title>
+    <meta name="description" content="Portafolio de identidad ética profesional: dilemas morales, responsabilidad, cuidado e integridad sostenible. Universidad Científica del Sur, 4AH." />
+    <link rel="preload" as="image" href="assets/software-background.png" />
+    <meta name="theme-color" content="#080b12" /><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%23080b12%27/%3E%3Cpath d=%27M11 9L4 16l7 7M21 9l7 7-7 7M19 6l-6 20%27 fill=%27none%27 stroke=%27%233b82f6%27 stroke-width=%272%27/%3E%3C/svg%3E" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              ink: "#050C1A",
+              navy: "#0A192F",
+              night: "#0F172A",
+              panel: "#1E293B",
+              panel2: "#1B2A4A",
+              gold: "#D4AF37",
+              cyan: "#38BDF8",
+              sky: "#60A5FA",
+              mist: "#E2E8F0"
+            },
+            fontFamily: {
+              serif: ["Playfair Display", "serif"],
+              sans: ["Inter", "sans-serif"]
+            },
+            boxShadow: {
+              glow: "0 0 0 1px rgba(56, 189, 248, .18), 0 24px 80px rgba(2, 8, 23, .55)"
+            }
+          }
+        }
+      };
+    </script>
+    <style>
+      html { scroll-behavior: smooth; }
+      body {
+        font-family: Inter, system-ui, sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(56, 189, 248, .12), transparent 34rem),
+          linear-gradient(135deg, #050C1A 0%, #0A192F 52%, #0F172A 100%);
+        color: #F8FAFC;
+      }
+      .glass { background: rgba(5, 12, 26, .82); backdrop-filter: blur(18px); }
+      .serif { font-family: "Playfair Display", serif; }
+      .ethic-card { background: linear-gradient(145deg, rgba(30, 41, 59, .95), rgba(27, 42, 74, .92)); }
+      .thin-grid {
+        background-image:
+          linear-gradient(rgba(226, 232, 240, .04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(226, 232, 240, .04) 1px, transparent 1px);
+        background-size: 42px 42px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+// Datos editables: content/temas.json y content/linkedin.json. Se incorporan al compilar.
+/* PROJECT_CONTENT */
+const team = [
+        ["Fabricio Fernandez", "Ingenieria de Software", "Investiga el bienestar del equipo y fomenta la retroalimentación crítica en las ceremonias y retrospectivas."],
+        ["Gabriel Aparicio", "Ingenieria de Software", "Vincula la ética tecnológica y el uso responsable de datos a través del análisis de incidentes del mundo real."],
+        ["Antony Taipe", "Ingenieria de Software", "Integra la responsabilidad algorítmica y la seguridad informática a partir de casos y entornos de producción reales."],
+        ["Rosario del Pilar Torres", "Ingenieria de Software", "Evalúa marcos regulatorios (como protección de datos) y vacíos legales para salvaguardar la privacidad de los usuarios."],
+        ["Sandro Aucca", "Ingenieria de Software", "Promueve un entorno de trabajo saludable y contribuye con una perspectiva analítica en las decisiones de arquitectura y equipo."],
+        ["Zuleyma Rodriguez", "Ingenieria de sistemas empresarial", "Ordena decisiones, riesgos y compromisos profesionales medibles."]
+      ];
+const values = [
+        ["I", "Integridad de Datos y Privacidad", "Valor fundamental y ético"],
+        ["II", "Calidad de Software y Responsabilidad", "Valor técnico-profesional"],
+        ["III", "Accesibilidad e Inclusión", "Valor social e impacto al usuario"],
+        ["IV", "Escalabilidad y Mantenibilidad", "Valor evolutivo y técnico"]
+      ];
+const {useState,useEffect,useRef}=React;
+const navItems=[['inicio','Inicio'],['equipo','Equipo'],['manifiesto','Manifiesto'],['temas','Temas'],['podcast','Podcast'],['video','Video'],['infografia','Infografía']];
+const reduced=()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function Icon({name,size=20}){const paths={arrow:'M5 12h14m-6-6 6 6-6 6',code:'m8 6-6 6 6 6m8-12 6 6-6 6m-3-15-2 18',file:'M14 2H5v20h14V7l-5-5Zm0 0v6h5M8 13h8m-8 4h6',plus:'M12 5v14M5 12h14',close:'m6 6 12 12M6 18 18 6',download:'M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5',share:'M12 16V3m-5 5 5-5 5 5M5 12v9h14v-9',external:'M14 3h7v7m0-7L10 14M10 3H3v18h18v-7',upload:'M12 17V3m-5 5 5-5 5 5M4 16v5h16v-5',chevron:'m9 5 7 7-7 7',pause:'M9 5v14M15 5v14',play:'m8 5 11 7-11 7V5',reset:'M3 11a9 9 0 1 1 2 7M3 4v7h7'};return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={paths[name]||paths.code}/></svg>;}
+function SectionHeading({number,label,title,children}){return <div className="section-heading reveal"><div><p className="eyebrow"><span>{number}</span> / {label}</p><h2>{title}</h2></div>{children}</div>;}
+
+/* EDITOR_COMPONENT */
+/* INTRO_COMPONENT */
+
+function Inicio(){return <section id="inicio" className="hero section-anchor software-backdrop"><div className="hero-body"><div className="hero-copy"><p className="eyebrow hero-enter">INGENIERÍA DE SOFTWARE <span className="eyebrow-slash">/</span> 2026-II</p><h1 className="hero-enter">Código<br/><span>Ético</span><span className="title-dot">.</span></h1><p className="hero-subtitle hero-enter">Portafolio Digital de Identidad<br/>Ética Profesional</p><p className="hero-description hero-enter">Este portafolio reúne nuestro recorrido por dilemas morales, teorías éticas, responsabilidad profesional, cuidado e integridad sostenible. Es una bitácora de decisiones: lo que defendemos, lo que cuestionamos y la forma en que queremos ejercer nuestra profesión.</p><a className="primary-button hero-enter" href="#equipo">Conoce al equipo <Icon name="arrow"/></a></div><div className="hero-visual"><CodeWindow/><p className="north-quote">Una guía para decidir con <span>dignidad</span>, justicia y cuidado.</p></div></div><div className="course-strip reveal">{[['Curso','Ética y Deontología Profesional'],['Carrera','Ingeniería de Software y Sistemas'],['Semestre / Sección','2026-II · 4AH'],['Docente','Maria Esperanza Noblecilla Alburqueque']].map(([a,b])=><div key={a}><span className="mono">{a}</span><p>{b}</p></div>)}</div></section>;}
+
+function LinkedInIcon(){return <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96C2 21.32 2.69 22 3.55 22h16.9c.86 0 1.55-.68 1.55-1.52V3.52C22 2.68 21.31 2 20.45 2ZM7.93 18.75H4.98V9.2h2.95v9.55ZM6.45 7.9a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42Zm12.3 10.85H15.8V14.1c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.73H9.51V9.2h2.83v1.3h.04c.39-.74 1.36-1.52 2.79-1.52 2.99 0 3.54 1.97 3.54 4.53v5.24Z"/></svg>;}
+function Equipo(){const [active,setActive]=useState(null);const row=useRef(null);useEffect(()=>{const mm=gsap.matchMedia();mm.add('(prefers-reduced-motion: no-preference)',()=>{gsap.from(row.current.children,{y:80,opacity:0,duration:.95,stagger:.11,ease:'power3.out',clearProps:'transform,opacity',scrollTrigger:{trigger:row.current,start:'top 86%',once:true}});});return()=>mm.revert();},[]);function light(e){const rect=e.currentTarget.getBoundingClientRect();e.currentTarget.style.setProperty('--mx',`${e.clientX-rect.left}px`);e.currentTarget.style.setProperty('--my',`${e.clientY-rect.top}px`);}return <section id="equipo" className="content-section section-anchor software-backdrop"><SectionHeading number="01" label="EL EQUIPO" title={<>Seis perspectivas.<br/><span>Un mismo compromiso.</span></>}><p>Quiénes somos</p></SectionHeading><div ref={row} className="team-columns" onMouseLeave={()=>{if(!row.current.contains(document.activeElement))setActive(null);}} onBlur={e=>{if(!e.currentTarget.contains(e.relatedTarget))setActive(null);}}>{team.map(([name,career,bio],i)=><article key={name} className={`team-column ${active===i?'expanded':''}`} onPointerMove={light} onPointerEnter={e=>{if(e.pointerType==='mouse')setActive(i);}} onFocus={()=>setActive(i)}><button type="button" className="member-toggle" aria-expanded={active===i} aria-controls={`bio-${i}`} aria-label={`Conocer a ${name}`} onClick={()=>setActive(i)}><span className="member-top mono"><span>{String(i+1).padStart(2,'0')}</span><span className="member-plus">{active===i?'−':'+'}</span></span><span className="member-initials mono" aria-hidden="true">{name.split(' ').filter(s=>s.length>3).slice(0,2).map(n=>n[0]).join('')}</span><span className="member-role mono">{career}</span></button><div className="member-body"><h3>{name}</h3><div id={`bio-${i}`} className="member-detail"><p>{bio}</p></div></div>{linkedinProfiles[name]?<a className="member-bottom linkedin-link mono" href={linkedinProfiles[name]} target="_blank" rel="noopener noreferrer" aria-label={`LinkedIn de ${name} (abre en otra pestaña)`}><span><LinkedInIcon/> LinkedIn</span><Icon name="external" size={14}/></a>:<span className="member-bottom linkedin-link linkedin-pending mono" title="Perfil de LinkedIn pendiente de configurar"><span><LinkedInIcon/> LinkedIn</span><span className="sr-only">: enlace pendiente</span></span>}</article>)}</div></section>;}
+
+function Manifiesto(){return <section id="manifiesto" className="content-section manifesto section-anchor software-backdrop"><SectionHeading number="02" label="MANIFIESTO" title={<>El código cambia.<br/><span>Nuestros principios, no.</span></>}/><div className="manifesto-layout"><div className="manifesto-intro reveal"><p className="mono panel-label">NUESTRA ARQUITECTURA ÉTICA</p><blockquote>“La ética es la arquitectura de nuestro software: los valores sostienen cada decisión, la revisión crítica detecta nuestras fallas y el cuidado de las personas da sentido a cada línea de código.”</blockquote><div className="purpose"><h3>Propósito profesional</h3><p>Guiados por las buenas prácticas de la ingeniería de software, priorizamos la calidad, la seguridad de los datos y el bienestar de los usuarios en el diseño de arquitecturas y sistemas.</p></div></div><div className="values-panel reveal"><p className="mono panel-label">ENFOQUE EN CALIDAD, ÉTICA Y DESARROLLO DE SOFTWARE</p>{values.map(([n,v,k])=><div className="value-row" key={n}><span className="value-number mono">{n}</span><div><h3>{v}</h3><p>{k}</p></div></div>)}</div></div><div className="manifesto-bottom"><div className="reveal"><h3>Usuarios y activos que protegemos</h3><div className="tag-list">{['Usuarios finales','Datos personales','Comunidades digitales','Población con brecha digital'].map(t=><span key={t}>{t}</span>)}</div></div><div className="reveal"><h3>Mapa crítico profesional</h3><p>Identificamos deudas técnicas, brechas de seguridad y malas prácticas normalizadas que comprometen la integridad del software. Nuestro marco propone arquitecturas trazables, auditoría de código continua y responsabilidad técnica en la entrega de producción.</p></div></div></section>;}
+
+function Modal({title,onClose,children,wide=false,canClose=true}){const ref=useRef(null),closing=useRef(false),previousOverflow=useRef(''),opener=useRef(document.activeElement);const closeRef=useRef(onClose);closeRef.current=onClose;useEffect(()=>{const dialog=ref.current;previousOverflow.current=document.body.style.overflow;document.body.style.overflow='hidden';dialog.showModal();if(!reduced())gsap.fromTo(dialog,{y:35,opacity:0,scale:.98},{y:0,opacity:1,scale:1,duration:.42,ease:'power3.out'});return()=>{gsap.killTweensOf(dialog);dialog.close();document.body.style.overflow=previousOverflow.current;if(opener.current?.isConnected)opener.current.focus({preventScroll:true});};},[]);function close(){if(!canClose||closing.current)return;closing.current=true;if(reduced()){closeRef.current();return;}ref.current.classList.add('closing');gsap.to(ref.current,{y:25,opacity:0,scale:.98,duration:.23,ease:'power2.in',onComplete:()=>closeRef.current()});}return <dialog ref={ref} className={`modal ${wide?'modal-wide':''}`} aria-labelledby="modal-title" onCancel={e=>{e.preventDefault();close();}} onClick={e=>{if(e.target===ref.current)close();}}><div className="modal-inner"><div className="modal-header"><p id="modal-title" className="mono">{title}</p><button className="icon-button" disabled={!canClose} onClick={close} aria-label="Cerrar ventana"><Icon name="close"/></button></div>{typeof children==='function'?children(close):children}</div></dialog>;}
+const formatSize=n=>n>1048576?`${(n/1048576).toFixed(1)} MB`:`${Math.max(1,Math.round(n/1024))} KB`;
+function Cover({doc}){return doc.cover?<img className="pdf-cover-image" src={doc.cover} alt={`Portada de ${doc.title}`} loading="lazy"/>:<div className="document-cover"><span className="mono">CÓDIGO ÉTICO / TEMAS</span><Icon name="file" size={58}/><h3>{doc.title}</h3><span className="mono">PDF · {formatSize(doc.size)}</span></div>;}
+function PdfModal({doc,onClose}){return <Modal title="BIBLIOTECA / DOCUMENTO PDF" onClose={onClose} wide><div className="pdf-modal-layout"><div className="pdf-context"><span className="document-kind mono">DOCUMENTO ACADÉMICO</span><h2>{doc.title}</h2><p className="pdf-meta mono">{doc.filename} · {formatSize(doc.size)}</p><div className="pdf-description">{doc.description.split(/\n\s*\n/).map((p,i)=><p key={i}>{p}</p>)}</div><div className="pdf-actions"><a className="primary-button" href={doc.file} download={doc.filename}><Icon name="download"/> Descargar PDF</a><a className="secondary-button" href={doc.file} target="_blank" rel="noopener noreferrer">Abrir PDF completo <Icon name="external" size={17}/></a></div></div><aside className="pdf-cover"><Cover doc={doc}/></aside></div></Modal>;}
+
+function Temas(){const docs=libraryDocuments;const [selected,setSelected]=useState(null);return <section id="temas" className="content-section section-anchor software-backdrop"><SectionHeading number="03" label="BIBLIOTECA" title={<>Ideas que merecen<br/><span>una lectura.</span></>}/><div className="library-bar mono"><span>TEMAS / DOCUMENTOS</span><span>{String(docs.length).padStart(2,'0')} ARCHIVOS</span></div>{docs.length?<div className="pdf-grid">{docs.map((doc,i)=><button className="pdf-card" key={doc.id} onClick={()=>setSelected(doc)}><div className="pdf-card-top mono"><span>PDF / {String(i+1).padStart(2,'0')}</span><Icon name="external" size={19}/></div><div className="pdf-card-cover"><Cover doc={doc}/></div><h3>{doc.title}</h3><p>{doc.description}</p><span className="pdf-card-meta mono">{formatSize(doc.size)} <span>VER DOCUMENTO →</span></span></button>)}</div>:<div className="library-empty"><span className="empty-file"><Icon name="file" size={32}/></span><h3>Lecturas en preparación.</h3><p>Los documentos de nuestra biblioteca estarán disponibles próximamente.</p></div>}{selected&&<PdfModal doc={selected} onClose={()=>setSelected(null)}/>}</section>;}
+
+function EmptySection({id,label,number}){return <section id={id} className="empty-section section-anchor reveal"><span className="mono">{number} / {label.toUpperCase()}</span><h2>{label}</h2><p>Próximamente</p><span className="empty-section-line"/></section>;}
+function Shell({ready=true}){const [active,setActive]=useState('inicio'),[notice,setNotice]=useState('');const root=useRef(null),timer=useRef(null);useEffect(()=>{if(!ready)return;gsap.registerPlugin(ScrollTrigger);const context=gsap.context(()=>{const mm=gsap.matchMedia();mm.add('(prefers-reduced-motion: no-preference)',()=>{gsap.from('.hero-enter',{opacity:0,y:30,duration:.9,stagger:.1,ease:'power3.out',clearProps:'all'});gsap.utils.toArray('.reveal').forEach(el=>{gsap.from(el,{opacity:0,y:35,duration:.8,ease:'power3.out',clearProps:'all',scrollTrigger:{trigger:el,start:'top 92%',once:true}});});});gsap.to('.reading-progress',{scaleX:1,ease:'none',scrollTrigger:{trigger:document.documentElement,start:'top top',end:'bottom bottom',scrub:true}});},root);const observer=new IntersectionObserver(entries=>{const match=entries.filter(e=>e.isIntersecting).sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top)[0];if(match)setActive(match.target.id);},{rootMargin:'-15% 0px -55% 0px'});navItems.forEach(([id])=>{const el=document.getElementById(id);if(el)observer.observe(el);});const hash=location.hash.slice(1);if(navItems.some(([id])=>id===hash))requestAnimationFrame(()=>document.getElementById(hash)?.scrollIntoView({behavior:'instant'}));return()=>{context.revert();observer.disconnect();clearTimeout(timer.current);};},[ready]);async function share(){try{if(location.protocol==='file:')throw Error();if(navigator.share)await navigator.share({title:'Código Ético',url:location.href});else{await navigator.clipboard.writeText(location.href);setNotice('Enlace copiado.');}}catch(e){if(e.name!=='AbortError')setNotice('Copia la dirección del portafolio para compartirla.');}clearTimeout(timer.current);timer.current=setTimeout(()=>setNotice(''),4000);}return <div ref={root} className="site-shell"><a href="#contenido" className="skip-link">Saltar al contenido</a><header className="site-header"><div className="header-inner"><a className="brand" href="#inicio" aria-label="Código Ético, inicio"><span className="brand-mark"><Icon name="code" size={25}/></span><span>Código <span className="brand-blue">Ético</span><small className="mono">PORTAFOLIO / 4AH</small></span></a><nav className="desktop-nav" aria-label="Secciones">{navItems.map(([id,label])=><a key={id} href={`#${id}`} className={active===id?'active':''} aria-current={active===id?'location':undefined}>{label}</a>)}</nav><button className="share-button" onClick={share} aria-label="Compartir portafolio"><Icon name="share" size={18}/></button><select className="mobile-nav" aria-label="Ir a sección" value={active} onChange={e=>{document.getElementById(e.target.value).scrollIntoView({behavior:reduced()?'instant':'smooth'});history.replaceState(null,'',`#${e.target.value}`);}}>{navItems.map(([id,label])=><option value={id} key={id}>{label}</option>)}</select></div><div className="reading-progress"/></header><main id="contenido"><Inicio/><Equipo/><Manifiesto/><Temas/><div className="upcoming-sections"><EmptySection id="podcast" number="04" label="Podcast"/><EmptySection id="video" number="05" label="Video"/><EmptySection id="infografia" number="06" label="Infografía"/></div></main><footer className="site-footer"><div><a className="brand" href="#inicio">Código <span className="brand-blue">Ético</span></a><p>Universidad Científica del Sur</p><p>Fabricio, Gabriel, Antony, Rosario, Sandro y Zuleyma</p><p>Docente: Maria Esperanza Noblecilla Alburqueque</p></div><div className="footer-right mono"><span>4AH / 2026-II</span><button onClick={share}>COMPARTIR PORTAFOLIO <Icon name="share" size={15}/></button><a href="#inicio">VOLVER AL INICIO ↑</a></div></footer><div className={`toast ${notice?'visible':''}`} role="status">{notice}</div></div>;}
+gsap.registerPlugin(ScrollTrigger);
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+
+    </script>
+  </body>
+</html>
