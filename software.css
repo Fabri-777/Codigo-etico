@@ -49,3 +49,39 @@
 @media(max-width:1100px){.library-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.library-grid{grid-template-columns:1fr;gap:22px}.library-card-body{padding:22px}.library-card-body h3{font-size:24px}.library-instructions{font-size:14px}}
 @media(prefers-reduced-motion:reduce){.library-preview:hover .pdf-cover-image{transform:none}}
+
+/* Autores y bibliografia: seccion final, referencias y filtros por trabajo. */
+.authors-section{padding-top:70px;padding-bottom:85px;border-top:1px solid var(--line);background:radial-gradient(ellipse at 95% 0%,#17345a28,transparent 50%)}
+.authors-intro{max-width:740px;font-size:17px;line-height:1.85;color:#a3b3ca;margin:-10px 0 30px}
+.authors-toolbar{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:26px}
+.authors-filters{display:flex;gap:8px;flex-wrap:wrap}
+.authors-filters button{font-size:12px;padding:9px 17px;border:1px solid #2a3a51;border-radius:7px;color:#9cb0cd;background:#101927;min-height:40px}
+.authors-filters button:hover{border-color:#508fe8;color:white}
+.authors-filters button[aria-pressed=true]{background:#3b82f621;color:#bfd9ff;border-color:#3b82f6;box-shadow:0 0 18px #3b82f615}
+.authors-count{font-size:11px;color:#7995bb;white-space:nowrap;letter-spacing:1px}
+.authors-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:stretch}
+.author-card{min-width:0;padding:26px;border:1px solid #26354b;border-radius:12px;background:linear-gradient(145deg,#111b2b,#0c1320);display:flex;flex-direction:column;transition:border-color .3s,box-shadow .3s;animation:author-enter .35s var(--ease) both}
+.author-card:hover,.author-card:focus-within{border-color:#3b82f699;box-shadow:0 15px 35px -24px #3b82f699}
+.author-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:25px}
+.author-monogram{width:46px;height:46px;flex-shrink:0;display:grid;place-items:center;color:#8bbafa;font-size:16px;border:1px solid #355786;border-radius:10px;background:#3b82f612}
+.author-tags{display:flex;justify-content:flex-end;align-items:center;gap:6px;flex-wrap:wrap;font-size:9px;line-height:1.5;letter-spacing:.2px;padding-top:3px}
+.author-tags span{padding:4px 6px;border:1px solid #2a405f;border-radius:4px;color:#96b5e1;background:#1a2a4250}
+.author-tags span.is-complement{color:#c4b5fd;border-color:#7963ab60;background:#7860ac12}
+.author-area{font-size:10px;line-height:1.7;letter-spacing:.7px;color:#7e9cc5;margin-bottom:10px}
+.author-card h3{font-size:24px;line-height:1.25;letter-spacing:-.7px;font-weight:500;color:#edf3ff;margin:0 0 17px}
+.author-contribution{font-size:14px;line-height:1.8;color:#a0b2cb;margin:0 0 25px}
+.author-reference{border-top:1px solid var(--line);padding-top:19px;margin-top:auto}
+.author-reference>.mono{font-size:9px;letter-spacing:.65px;color:#7590b4;margin-bottom:11px}
+.author-reference>p:last-child{font-size:13px;line-height:1.85;color:#bbc8dc;overflow-wrap:anywhere;padding-left:14px;text-indent:-14px}
+.author-source{display:flex;align-items:center;justify-content:space-between;gap:15px;font-size:13px;line-height:1.5;color:#8cbcff;padding-top:20px;margin-top:8px}
+.author-source:hover{color:#d7e8ff}
+.author-source svg{flex-shrink:0}
+.authors-note{display:flex;gap:17px;align-items:flex-start;border:1px solid #26374f;border-radius:10px;background:#101a29;margin-top:27px;padding:24px;color:#8fa8cb}
+.authors-note>svg{flex-shrink:0;margin-top:3px}
+.authors-note h3{font-size:15px;font-weight:500;color:#c8d7ed;margin-bottom:8px}
+.authors-note p{font-size:13px;line-height:1.85;max-width:980px}
+@keyframes author-enter{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(min-width:1001px) and (max-width:1200px){.desktop-nav{gap:15px;font-size:13px}.header-inner{gap:20px;padding:0 3%}.brand-mark{display:none}}
+@media(max-width:1100px){.authors-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.authors-grid{grid-template-columns:1fr;gap:18px}.authors-section{padding-bottom:50px}.authors-intro{font-size:15px;margin-top:0}.authors-toolbar{flex-direction:column;align-items:flex-start;gap:16px}.authors-filters{gap:6px}.authors-filters button{padding:9px 13px}.author-card{padding:24px}.authors-note{padding:20px;gap:12px}}
+@media(prefers-reduced-motion:reduce){.author-card{animation:none}}
