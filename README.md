@@ -4,6 +4,8 @@ Portafolio de Ingeniería de Software y Sistemas. Conserva los nombres, biograf�
 
 ## Novedades de esta versión
 
+- Fotos y LinkedIn del equipo en **content/equipo.json**, editables desde GitHub.
+- Publicación automática con GitHub Actions al guardar cambios en `main`.
 - Al abrir: spinner con «Cargando» durante 2 segundos, código rápido durante 1.6 segundos y revelado del contenido durante 0.6 segundos. La apertura se repite al recargar; no aparece al navegar entre secciones.
 - Fondo propio de ingeniería de software en Inicio, Equipo, Manifiesto y Temas, con capas oscuras para mantener la lectura.
 - Editor sobre deontología y ética profesional: dos conceptos seleccionables, botón Ejecutar y pausa.
@@ -13,16 +15,16 @@ Edita **intro.jsx** para cambiar la secuencia y sus tiempos (`INTRO_TIMING`); **
 
 ## Subir a tu repositorio de GitHub
 
-El ZIP de esta versión incluye **docs/** con la página compilada y su imagen, además de todo el código editable. Sube el contenido de la carpeta del proyecto a la raíz de tu repositorio. No subas `node_modules`, `.build` ni credenciales.
+Esta actualización se aplica sobre el proyecto completo que ya tienes. Sigue **[ACTUALIZAR-GITHUB.md](ACTUALIZAR-GITHUB.md)** para conocer los archivos que debes reemplazar y añadir. Conserva las carpetas al subirlos a la raíz del repositorio. No subas `node_modules`, `.build` ni credenciales.
 
-En **Settings → Pages**, selecciona **Deploy from a branch**, la rama **main** y la carpeta **/docs**, y guarda. No basta con subir únicamente el HTML: mantén **docs/assets/** junto a **docs/index.html** para conservar el fondo.
+En **Settings → Pages → Source**, selecciona **GitHub Actions**. El flujo **Publicar Codigo Etico** instala las dependencias, comprueba los datos y publica la página al guardar cambios en `main`.
 
-Después de modificar el código, ejecuta `npm run build`, reemplaza el contenido de **docs/** por el contenido nuevo de **dist/** y sube ambos cambios: fuentes y página compilada. Conserva los PDFs y portadas que se generen dentro de esa salida.
+Ya no necesitas actualizar `docs/` manualmente: la publicación usa `dist/`, generado en GitHub. Puedes conservar la antigua carpeta `docs/`. Los cambios en una propuesta de cambios (pull request) se comprueban, pero se publican después de incorporarlos a `main`.
 
 ## Abrir en Visual Studio Code
 
-1. Descomprime el ZIP completo.
-2. En VS Code, usa **Archivo → Abrir carpeta** y selecciona **codigo-etico**, la carpeta que contiene este README y `package.json`.
+1. Aplica la actualización a la carpeta completa de tu proyecto.
+2. En VS Code, usa **Archivo → Abrir carpeta** y selecciona la carpeta que contiene este README y `package.json`.
 3. Abre **Terminal → Nueva terminal** y ejecuta:
 
 ```sh
@@ -33,7 +35,7 @@ npm run dev
 
 Requiere Node.js y npm; compilado con Node.js 24.14.1. Abre http://127.0.0.1:4173. Tras editar, ejecuta de nuevo `npm run build` en otra terminal y recarga el navegador. Ctrl+C detiene el servidor.
 
-Para ver la versión incluida sin instalar nada, abre **dist/index.html** en tu navegador. Mantén la carpeta `dist` completa para que los enlaces a PDFs y portadas funcionen. **source.html es el archivo editable, no la página compilada que debes abrir en el navegador.**
+Después de compilar, también puedes abrir **dist/index.html** en tu navegador. Mantén la carpeta `dist` completa para que los enlaces a fotos, PDFs y portadas funcionen. **source.html es el archivo editable, no la página compilada que debes abrir en el navegador.**
 
 ## Añadir PDFs desde el código
 
@@ -63,13 +65,24 @@ Ejecuta **npm run build**. El tamaño y nombre del archivo se calculan automáti
 
 Las tarjetas abren una ventana con explicación a la izquierda y portada a la derecha. En móvil se apilan. Puedes descargar el PDF o abrirlo completo en otra pestaña. X, Escape y clic fuera cierran el modal.
 
-Los cambios locales aparecen en la página publicada cuando vuelvas a publicar la carpeta compilada. No se sincronizan por el hecho de editar los archivos en tu PC.
+Los cambios locales aparecen en la página publicada después de subirlos a `main` y de que GitHub Actions termine correctamente. También puedes editar los archivos y subir los PDFs directamente desde GitHub, sin instalar herramientas en tu PC.
 
-## Enlaces de LinkedIn
+## Fotos y LinkedIn del equipo
 
-Abre **content/linkedin.json** y pega la URL real del perfil entre las comillas junto al nombre correspondiente. Formato: `https://www.linkedin.com/in/identificador-real/`.
+Sube la foto a **public/assets/equipo/** y edita la entrada correspondiente en **content/equipo.json**. Ejemplo:
 
-Mantén los nombres exactamente iguales a los del equipo en `source.html`. Cuando una URL está vacía, se muestra el logo y texto de LinkedIn con el perfil pendiente; al completar la URL y compilar, se convierte en un enlace que abre el perfil en otra pestaña. No se han inventado URLs de personas.
+```json
+"Fabricio Fernandez": {
+  "foto": "assets/equipo/fabricio.jpg",
+  "linkedin": "https://www.linkedin.com/in/tu-identificador-real/"
+}
+```
+
+El fragmento representa una entrada del archivo existente: conserva las otras entradas, las llaves exteriores y las comas entre integrantes. Mantén los nombres exactamente iguales. Se aceptan JPG, PNG y WebP de hasta 5 MB; el nombre del archivo debe coincidir incluso en mayúsculas. Las rutas no llevan `public/` al comienzo.
+
+Si `foto` está vacía se muestran las iniciales. Si `linkedin` está vacío se conserva, por compatibilidad, el enlace de **content/linkedin.json**; si ambos están vacíos se muestra el perfil pendiente. Para quitar un enlace anterior, vacía ambos campos correspondientes. No se incluyen fotos ni URLs personales inventadas.
+
+Cada colaborador puede hacer esto desde GitHub. La guía **[ACTUALIZAR-GITHUB.md](ACTUALIZAR-GITHUB.md)** explica cómo invitarles y subir los archivos.
 
 ## Qué editar
 
@@ -80,8 +93,12 @@ Mantén los nombres exactamente iguales a los del equipo en `source.html`. Cuand
 | **content/temas.json** | Listado de PDFs con título, explicación y portada opcional. |
 | **public/pdfs/** | Tus archivos PDF. |
 | **public/portadas/** | Imágenes de portada. |
-| **content/linkedin.json** | URLs reales de cada integrante. |
-| **content.cjs** | Validación de PDFs, portadas y enlaces durante la compilación. |
+| **content/equipo.json** | Foto y LinkedIn de cada integrante. |
+| **public/assets/equipo/** | Fotografías del equipo. |
+| **content/linkedin.json** | Enlaces anteriores, usados como alternativa si el nuevo campo está vacío. |
+| **team-photo.jsx / team-photo.css** | Presentación y estilos de las fotografías. |
+| **.github/workflows/pages.yml** | Compilación y publicación automática. |
+| **content.cjs** | Validación de PDFs, portadas, fotografías y enlaces durante la compilación. |
 | **build.cjs** | Generación de `dist/index.html` con scripts, estilos y datos incorporados. |
 | **dev.cjs** | Servidor local para abrir el proyecto y los documentos. |
 | **package.json / package-lock.json** | Comandos y versiones exactas de las dependencias. |
@@ -106,6 +123,8 @@ React, GSAP y los estilos se incorporan a `dist/index.html`; solo las fuentes In
 La página es estática: no requiere base de datos, API de subida ni servidor de almacenamiento. Puedes alojar **todo el contenido de dist/** en un servidor de archivos estáticos. El paquete no incluye credenciales ni identificadores de cuenta.
 
 ## Verificación
+
+Actualización de equipo: compilación local con foto y enlace de prueba, ruta con espacios, conservación de las seis tarjetas, rechazo de fotos inexistentes y enlaces inválidos, y revisión de la configuración YAML. Los datos de prueba se retiraron antes de preparar la entrega. El primer despliegue del nuevo flujo se verificará en tu repositorio después de subirlo y seleccionar GitHub Actions.
 
 Compilación y renderizado de las siete secciones; conservación de nombres y biografías; ausencia de etiquetas antiguas y de formularios de carga; configuración de PDFs y portadas; enlaces y estructura del modal; descarga local completa y parcial de un PDF de prueba. Los documentos de prueba no se incluyen en la biblioteca final.
 

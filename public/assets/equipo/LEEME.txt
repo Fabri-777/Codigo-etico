@@ -1,0 +1,5 @@
+Coloca aqui las fotos de los integrantes: JPG, PNG o WebP, hasta 5 MB.
+Ejemplo de nombre: fabricio.jpg
+La ruta que debes escribir en content/equipo.json es: assets/equipo/fabricio.jpg
+No subas fotos privadas que no quieras mostrar en la pagina publica.
+Si el campo foto esta vacio, la tarjeta conserva las iniciales.

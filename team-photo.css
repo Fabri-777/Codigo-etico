@@ -1,0 +1,7 @@
+.member-portrait{display:flex;align-items:center;justify-content:center;width:100%;min-height:150px;margin:25px 0 30px;overflow:hidden;border-radius:9px;position:relative}
+.member-portrait.has-photo{height:210px;border:1px solid #3b82f630;background:#111e32}
+.member-portrait img{width:100%;height:100%;object-fit:cover;object-position:center 30%;transition:transform .65s cubic-bezier(.22,1,.36,1),filter .4s;filter:saturate(.8)}
+.team-column.expanded .member-portrait img{transform:scale(1.025);filter:saturate(1)}
+.member-portrait .member-initials{margin:0!important}
+@media(max-width:1000px){.member-portrait.has-photo{height:220px}.member-portrait{min-height:110px;margin:20px 0 24px}}
+@media(prefers-reduced-motion:reduce){.member-portrait img{transition:none}.team-column.expanded .member-portrait img{transform:none}}

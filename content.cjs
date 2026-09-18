@@ -36,6 +36,32 @@ function loadContent(root) {
     }
     profiles[name] = link;
   }
-  return {documents, profiles};
+  // Un archivo para las fotos y LinkedIn. Conserva los enlaces antiguos si el nuevo campo está vacío.
+  const members = JSON.parse(fs.readFileSync(path.join(root, 'content/equipo.json'), 'utf8'));
+  if (!members || Array.isArray(members) || typeof members !== 'object') throw Error('content/equipo.json debe ser un objeto de integrantes.');
+  const photos = {};
+  for (const [name, member] of Object.entries(members)) {
+    if (!Object.hasOwn(profiles,name)) throw Error('Nombre no reconocido en equipo.json: ' + name + '. Conserva los nombres originales.');
+    if (!member || typeof member.foto !== 'string' || typeof member.linkedin !== 'string') throw Error('Cada integrante necesita foto y linkedin como texto: ' + name);
+    const link=member.linkedin.trim();
+    if (link) {
+      let url; try { url=new URL(link); } catch { throw Error('LinkedIn no válido para ' + name); }
+      if (url.protocol!=='https:' || !['linkedin.com','www.linkedin.com'].includes(url.hostname) || !/^\/in\/[^/]+\/?$/.test(url.pathname) || url.username || url.password || url.port) throw Error('Usa la URL HTTPS del perfil de LinkedIn de ' + name);
+      profiles[name]=link;
+    }
+    photos[name]='';
+    if(member.foto.trim()) {
+      const photo=asset(member.foto.trim(),'assets/equipo',['.jpg','.jpeg','.png','.webp']);
+      const bytes=fs.readFileSync(photo.filename);
+      if(bytes.length>5*1024*1024) throw Error('La foto de ' + name + ' supera los 5 MB.');
+      const ext=path.extname(photo.filename).toLowerCase();
+      const png=bytes.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10]));
+      const jpg=bytes[0]===255 && bytes[1]===216 && bytes[2]===255;
+      const webp=bytes.subarray(0,4).toString()==='RIFF' && bytes.subarray(8,12).toString()==='WEBP';
+      if(!(ext==='.png'?png:ext==='.webp'?webp:jpg)) throw Error('La foto de ' + name + ' no coincide con su formato JPG, PNG o WebP.');
+      photos[name]=photo.url;
+    }
+  }
+  return {documents, profiles, photos};
 }
 module.exports = {loadContent};

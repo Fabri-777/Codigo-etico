@@ -6,9 +6,9 @@ const esbuild = require('esbuild');
 const root = __dirname;
 process.chdir(root);
 const html = fs.readFileSync('source.html', 'utf8');
-const {documents, profiles} = require('./content.cjs').loadContent(root);
-const content = 'const libraryDocuments = ' + JSON.stringify(documents) + ';\nconst linkedinProfiles = ' + JSON.stringify(profiles) + ';';
-const jsx = html.match(/<script type="text\/babel">([\s\S]*?)<\/script>/)[1].replace('/* PROJECT_CONTENT */', () => content).replace('/* EDITOR_COMPONENT */',()=>fs.readFileSync('editor.jsx','utf8')).replace('/* INTRO_COMPONENT */',()=>fs.readFileSync('intro.jsx','utf8'));
+const {documents, profiles, photos} = require('./content.cjs').loadContent(root);
+const content = 'const libraryDocuments = ' + JSON.stringify(documents) + ';\nconst linkedinProfiles = ' + JSON.stringify(profiles) + ';\nconst teamPhotos = ' + JSON.stringify(photos) + ';';
+const jsx = html.match(/<script type="text\/babel">([\s\S]*?)<\/script>/)[1].replace('/* PROJECT_CONTENT */', () => content).replace('/* EDITOR_COMPONENT */',()=>fs.readFileSync('editor.jsx','utf8')).replace('/* INTRO_COMPONENT */',()=>fs.readFileSync('intro.jsx','utf8')).replace('/* TEAM_PHOTO_COMPONENT */',()=>fs.readFileSync('team-photo.jsx','utf8'));
 const config = html.match(/tailwind.config = ([\s\S]*?);\s*<\/script>/)[1];
 // Limpia solo la carpeta de salida verificada dentro de este proyecto.
 const outputDirectory=path.resolve(root,'dist');
@@ -25,7 +25,7 @@ execFileSync(process.execPath, [require.resolve('tailwindcss/lib/cli.js'), '-c',
 const transformed = esbuild.transformSync(jsx, {loader:'jsx',minify:true,target:'es2020',format:'iife'}).code;
 const js = ['node_modules/react/umd/react.production.min.js','node_modules/react-dom/umd/react-dom.production.min.js','node_modules/gsap/dist/gsap.min.js','node_modules/gsap/dist/ScrollTrigger.min.js'].map(p=>fs.readFileSync(p,'utf8')).join('\n') + '\n' + transformed;
 new vm.Script(js);
-const css = fs.readFileSync('.build/utilities.css', 'utf8') + '\n' + fs.readFileSync('software.css','utf8') + '\n' + fs.readFileSync('experience.css','utf8');
+const css = fs.readFileSync('.build/utilities.css', 'utf8') + '\n' + fs.readFileSync('software.css','utf8') + '\n' + fs.readFileSync('experience.css','utf8') + '\n' + fs.readFileSync('team-photo.css','utf8');
 let out = html.replace(/\s*<script src="[^"]*"><\/script>/g,'').replace(/<script>\s*tailwind.config[\s\S]*?<\/script>/,'').replace(/<style>[\s\S]*?<\/style>/,'<style>'+css+'</style>');
 out = out.replace(/<script type="text\/babel">[\s\S]*?<\/script>/, () => '<script>'+js.replace(/<\/script/gi,'<\\/script')+'</script>');
 out = out.replace('<div id="root"></div>', '<noscript>Activa JavaScript para consultar las secciones del portafolio Código Ético.</noscript><div id="root"></div>');
