@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "id": "ac1",
+    "title": "Metáfora y propósito profesional",
+    "description": "El primer trabajo presenta la brújula ética como metáfora de las decisiones que tomamos al desarrollar software. Su propósito es orientar la tecnología hacia el bien común, integrando seguridad, privacidad, transparencia y responsabilidad por sus efectos en las personas.\n\nEl equipo relaciona esta propuesta con tres conceptos de Aristóteles: el telos, entendido como la finalidad social de la profesión; la areté, vinculada al código limpio, las buenas prácticas y la mejora continua; y la eudaimonía, asociada al bienestar de usuarios y desarrolladores.\n\nLa ficha establece la base del Manifiesto de Identidad Ética: crear soluciones útiles y confiables que respondan a necesidades reales y contribuyan al desarrollo de la sociedad peruana.",
+    "file": "pdfs/ac1-grupo-2.pdf",
+    "cover": "portadas/ac1.jpg"
+  },
+  {
+    "id": "ac2",
+    "title": "Poblaciones vulnerables y responsabilidad",
+    "description": "Este trabajo identifica a las personas y organizaciones que pueden quedar excluidas por decisiones de diseño e implementación de software: trabajadores con discapacidad, trabajadores con poca experiencia digital y micro y pequeñas empresas de zonas rurales o periurbanas.\n\nEl análisis vincula la falta de accesibilidad con la autonomía y la justicia; la complejidad de los sistemas con la dependencia y el riesgo de daño; y las limitaciones económicas, de infraestructura y conectividad con la desigualdad de oportunidades. La ficha se apoya en la dignidad humana y en la idea de reconocer a las personas como fines en sí mismas.\n\nEl compromiso del equipo es construir tecnología que funcione como un puente: sistemas accesibles, comprensibles y adecuados a las posibilidades de sus usuarios, capaces de reducir brechas y generar oportunidades.",
+    "file": "pdfs/ac2-grupo-2.pdf",
+    "cover": "portadas/ac2.jpg"
+  },
+  {
+    "id": "ac3",
+    "title": "Jerarquía de valores y decisiones éticas",
+    "description": "El tercer trabajo aplica la tabla axiológica de Max Scheler para examinar los valores presentes en el ejercicio de la ingeniería de software. La evaluación considera el bienestar, la experiencia de usuario, la justicia, la calidad del código y la rentabilidad, distinguiendo entre la práctica actual y los compromisos del equipo.\n\nLa tensión principal aparece cuando la rapidez de entrega y el recorte de costos desplazan las pruebas, la documentación y la seguridad. El documento analiza cómo estas decisiones pueden producir sistemas defectuosos, comprometer datos sensibles y afectar la confianza de los usuarios.\n\nLa posición del equipo prioriza los valores vitales y espirituales por encima de la mera rentabilidad: proteger a las personas, desarrollar software accesible y sostener la excelencia técnica para que la tecnología reduzca la exclusión.",
+    "file": "pdfs/ac3-grupo-2.pdf",
+    "cover": "portadas/ac3.jpg"
+  },
+  {
+    "id": "ac4",
+    "title": "Negligencias éticas y acciones positivas",
+    "description": "El cuarto trabajo presenta un mapa crítico de tres fallas profesionales: omitir la accesibilidad, entregar software con brechas de ciberseguridad y utilizar patrones engañosos o algoritmos excluyentes. Cada caso se relaciona con las poblaciones afectadas y con los razonamientos que intentan justificarlo.\n\nEl equipo propone interfaces compatibles con tecnologías de asistencia, seguridad desde el diseño, auditorías y pruebas continuas, además de sistemas transparentes, soluciones de código abierto y plataformas de bajo consumo de datos. Estas acciones buscan proteger la autonomía, la privacidad y la participación de las personas.\n\nEl cierre integra los cuatro aprendizajes del Manifiesto y cuestiona si cumplir un plazo comercial justifica entregar tecnología deficiente o excluyente. El compromiso final es desarrollar software accesible, seguro y justo al servicio del bien común.",
+    "file": "pdfs/ac4-grupo-2.pdf",
+    "cover": "portadas/ac4.jpg"
+  }
+]
