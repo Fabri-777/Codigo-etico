@@ -6,8 +6,8 @@ const esbuild = require('esbuild');
 const root = __dirname;
 process.chdir(root);
 const html = fs.readFileSync('source.html', 'utf8');
-const {documents, profiles, photos} = require('./content.cjs').loadContent(root);
-const content = 'const libraryDocuments = ' + JSON.stringify(documents) + ';\nconst linkedinProfiles = ' + JSON.stringify(profiles) + ';\nconst teamPhotos = ' + JSON.stringify(photos) + ';';
+const {documents, profiles, photos, podcastMedia} = require('./content.cjs').loadContent(root);
+const content = 'const libraryDocuments = ' + JSON.stringify(documents) + ';\nconst linkedinProfiles = ' + JSON.stringify(profiles) + ';\nconst teamPhotos = ' + JSON.stringify(photos) + ';\nconst podcastMedia = ' + JSON.stringify(podcastMedia) + ';';
 const jsx = html.match(/<script type="text\/babel">([\s\S]*?)<\/script>/)[1].replace('/* PROJECT_CONTENT */', () => content).replace('/* EDITOR_COMPONENT */',()=>fs.readFileSync('editor.jsx','utf8')).replace('/* INTRO_COMPONENT */',()=>fs.readFileSync('intro.jsx','utf8')).replace('/* TEAM_PHOTO_COMPONENT */',()=>fs.readFileSync('team-photo.jsx','utf8'));
 const config = html.match(/tailwind.config = ([\s\S]*?);\s*<\/script>/)[1];
 // Limpia solo la carpeta de salida verificada dentro de este proyecto.
@@ -37,9 +37,10 @@ for (const doc of documents) for (const url of [doc.file, doc.cover].filter(Bool
   fs.mkdirSync(path.dirname(path.join('dist',relative)),{recursive:true});
   fs.copyFileSync(path.join('public',relative),path.join('dist',relative));
 }
+for(const relative of ['audio/podcast.mp3','videos/podcast.mp4']) if(fs.existsSync(path.join('public',relative))){fs.mkdirSync(path.dirname(path.join('dist',relative)),{recursive:true});fs.copyFileSync(path.join('public',relative),path.join('dist',relative));}
 if(fs.existsSync('.openai/hosting.json')){fs.mkdirSync('dist/.openai',{recursive:true});fs.copyFileSync('.openai/hosting.json','dist/.openai/hosting.json');}
 // Render every existing section without a browser to catch component errors and lost content.
-const testSource = 'import * as React from "react";import {renderToStaticMarkup} from "react-dom/server";const window={matchMedia:()=>({matches:true})};const gsap={registerPlugin:()=>{}};const ScrollTrigger={};\n' + jsx.replace(/ReactDOM.createRoot[\s\S]*$/, '') + '\nexport function validate(){return [Inicio,Equipo,Manifiesto,Temas,()=>React.createElement(EmptySection,{id:"podcast",label:"Podcast",number:"04"}),()=>React.createElement(EmptySection,{id:"video",label:"Video",number:"05"}),()=>React.createElement(EmptySection,{id:"infografia",label:"Infografía",number:"06"})].map(C=>renderToStaticMarkup(React.createElement(C)));}';
+const testSource = 'import * as React from "react";import {renderToStaticMarkup} from "react-dom/server";const window={matchMedia:()=>({matches:true})};const gsap={registerPlugin:()=>{}};const ScrollTrigger={};\n' + jsx.replace(/ReactDOM.createRoot[\s\S]*$/, '') + '\nexport function validate(){return [Inicio,Equipo,Manifiesto,Temas,()=>React.createElement(MediaSection,{id:"podcast",label:"Podcast",number:"04",kind:"audio",media:podcastMedia.audio}),()=>React.createElement(MediaSection,{id:"video",label:"Video",number:"05",kind:"video",media:podcastMedia.video}),()=>React.createElement(EmptySection,{id:"infografia",label:"Infografía",number:"06"})].map(C=>renderToStaticMarkup(React.createElement(C)));}';
 fs.writeFileSync('.build/check.cjs', esbuild.transformSync(testSource,{loader:'jsx',format:'cjs',target:'es2020'}).code);
 const sections = require('./.build/check.cjs').validate();
 const expected = ['Código','Fabricio Fernandez','Integridad de Datos y Privacidad','BIBLIOTECA','Podcast','Video','Infografía'];

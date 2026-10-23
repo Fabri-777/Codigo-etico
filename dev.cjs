@@ -1,6 +1,6 @@
 const http = require('node:http'), fs = require('node:fs'), path = require('node:path');
 const root = path.join(__dirname, 'dist');
-const mime = {'.html':'text/html; charset=utf-8','.pdf':'application/pdf','.jpg':'image/jpeg','.jpeg':'image/jpeg','.png':'image/png','.webp':'image/webp','.svg':'image/svg+xml'};
+const mime = {'.html':'text/html; charset=utf-8','.pdf':'application/pdf','.jpg':'image/jpeg','.jpeg':'image/jpeg','.png':'image/png','.webp':'image/webp','.svg':'image/svg+xml','.mp3':'audio/mpeg','.mp4':'video/mp4'};
 http.createServer((req,res) => {
   try {
     if (!['GET','HEAD'].includes(req.method)) {res.writeHead(405,{'Allow':'GET, HEAD'});res.end();return;}

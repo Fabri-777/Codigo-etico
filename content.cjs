@@ -62,6 +62,17 @@ function loadContent(root) {
       photos[name]=photo.url;
     }
   }
-  return {documents, profiles, photos};
+  const mediaFile = (relative, format) => {
+    const filename = path.join(publicRoot, ...relative.split('/'));
+    if (!fs.existsSync(filename)) return {ready:false,url:relative};
+    if (!fs.statSync(filename).isFile()) throw Error('La ruta multimedia no es archivo: public/' + relative);
+    const fd=fs.openSync(filename,'r'); const header=Buffer.alloc(12); let bytes;
+    try { bytes=fs.readSync(fd,header,0,12,0); } finally { fs.closeSync(fd); }
+    const valid=format==='mp4' ? bytes>=8 && header.subarray(4,8).toString()==='ftyp' : bytes>=3 && (header.subarray(0,3).toString()==='ID3' || (header[0]===255 && (header[1]&224)===224));
+    if(!valid) throw Error('El archivo public/'+relative+' no parece ser un '+format.toUpperCase()+' válido.');
+    return {ready:true,url:relative};
+  };
+  const podcastMedia={audio:mediaFile('audio/podcast.mp3','mp3'),video:mediaFile('videos/podcast.mp4','mp4')};
+  return {documents, profiles, photos, podcastMedia};
 }
 module.exports = {loadContent};
