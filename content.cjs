@@ -72,7 +72,7 @@ function loadContent(root) {
     if(!valid) throw Error('El archivo public/'+relative+' no parece ser un '+format.toUpperCase()+' válido.');
     return {ready:true,url:relative};
   };
-  const podcastMedia={audio:mediaFile('audio/podcast.mp3','mp3'),video:mediaFile('videos/podcast.mp4','mp4')};
+  const podcastMedia={audio:mediaFile('audio/podcast.mp3','mp3'),video:mediaFile('videos/video_reaccion.mp4','mp4')};
   return {documents, profiles, photos, podcastMedia};
 }
 module.exports = {loadContent};
