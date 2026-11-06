@@ -37,7 +37,7 @@ for (const doc of documents) for (const url of [doc.file, doc.cover].filter(Bool
   fs.mkdirSync(path.dirname(path.join('dist',relative)),{recursive:true});
   fs.copyFileSync(path.join('public',relative),path.join('dist',relative));
 }
-for(const relative of ['audio/podcast.mp3','videos/podcast.mp4']) if(fs.existsSync(path.join('public',relative))){fs.mkdirSync(path.dirname(path.join('dist',relative)),{recursive:true});fs.copyFileSync(path.join('public',relative),path.join('dist',relative));}
+for(const relative of ['audio/podcast.mp3','videos/video_reaccion.mp4']) if(fs.existsSync(path.join('public',relative))){fs.mkdirSync(path.dirname(path.join('dist',relative)),{recursive:true});fs.copyFileSync(path.join('public',relative),path.join('dist',relative));}
 if(fs.existsSync('.openai/hosting.json')){fs.mkdirSync('dist/.openai',{recursive:true});fs.copyFileSync('.openai/hosting.json','dist/.openai/hosting.json');}
 // Render every existing section without a browser to catch component errors and lost content.
 const testSource = 'import * as React from "react";import {renderToStaticMarkup} from "react-dom/server";const window={matchMedia:()=>({matches:true})};const gsap={registerPlugin:()=>{}};const ScrollTrigger={};\n' + jsx.replace(/ReactDOM.createRoot[\s\S]*$/, '') + '\nexport function validate(){return [Inicio,Equipo,Manifiesto,Temas,()=>React.createElement(MediaSection,{id:"podcast",label:"Podcast",number:"04",kind:"audio",media:podcastMedia.audio}),()=>React.createElement(MediaSection,{id:"video",label:"Video",number:"05",kind:"video",media:podcastMedia.video}),()=>React.createElement(EmptySection,{id:"infografia",label:"Infografía",number:"06"})].map(C=>renderToStaticMarkup(React.createElement(C)));}';
